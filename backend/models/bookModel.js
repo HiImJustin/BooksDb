@@ -1,8 +1,7 @@
 // Access the database connedtion from database.js
 const db = require("../database")
 
-
-// Get all by query Sectio //
+// Get all by query Section //
 
 module.exports.getAllBooks = () => {
     return db.query("SELECT * FROM book")
@@ -49,4 +48,14 @@ module.exports.getBookByAuthor = (author) => {
 module.exports.addBook = (bookTitle, originalTitle, yearofPublication, genre, millionsSold, languageWritten, coverImagePath, authorID) => {
     return db.query("insert into book (bookTitle, originalTitle, yearofPublication, genre, millionsSold, languageWritten, coverImagePath, authorID) " 
     + "VALUES(?,?,?,?,?,?,?,?)", [bookTitle, originalTitle, yearofPublication, genre, millionsSold, languageWritten, coverImagePath, authorID])
+}
+
+// Update
+module.exports.updateBook = (bookID, bookTitle, originalTitle, yearofPublication, genre, millionsSold, languageWritten, coverImagePath ) => {
+    return db.query("UPDATE book SET bookTitle = ?, originalTitle = ?, yearofPublication = ?, genre = ?, millionsSold = ?, languageWritten = ?, coverImagePath = ? Where bookID = ?", [bookTitle, originalTitle, yearofPublication, genre, millionsSold, languageWritten, coverImagePath, bookID])
+}
+
+// Delete
+module.exports.deleteBook = (bookId) => {
+    return db.query("Delete from book where bookID = ?", [bookId])
 }

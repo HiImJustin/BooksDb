@@ -18,7 +18,7 @@ router.get("/users", (req, res ) => {
 
 // Get user by Id
 // /api/users/userid/?
-router.get("/users/userid/:id", (req, res) => {
+router.get("/users/:id", (req, res) => {
     userModel.getUserById(req.params.id)
         .then((results) => {
             if (results.length > 0) {
@@ -97,7 +97,7 @@ router.get("/users/accessRights/:accessRights", (req, res) => {
         })
 })
 
-
+//Create new user
 router.post("/users/create", (req, res) => {
     //req.body represents the form field data (json in body of fetch)
     let user = req.body
@@ -120,6 +120,54 @@ router.post("/users/create", (req, res) => {
         res.status(500).json("query i hate this error - failed to create user")
     })
 
+})
+
+//Updates a user
+router.post("/users/update", (req, res) => {
+    // The req.body represents the posted json data from the form
+    let user = req.body
+
+    //each of the names below reference the "name" attritube in the form
+    userModel.updateUser(
+        user.userID,
+        user.firstName,
+        user.lastName,
+        user.email,
+        user.username,
+        user.password,
+        user.accessRights
+    )
+    .then((result) => {
+        if(result.affectedRows > 0 ) {
+            res.status(200).json("user updated")
+        }   else {
+            res.status(404).json("user not found")
+        }
+    })
+    .catch((error) => {
+        console.log(error)
+        res.status(500).json("failed to update user - query error")
+    })
+})
+
+//delete
+router.post("/users/delete", (req, res) => {
+    //Access the user id from the body of the request
+    let userId = req.query.id
+
+    //Ask the model to delete the user with userID 
+    userModel.deleteUser(userId)
+        .then((result) => {
+            if(result.affectedRows > 0) {
+                res.status(200).json("user deleted successfully")
+            }   else {
+                res.status(404).json("couldnt find that user to delete")
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+            res.status(500).json("failed to delete user - query error")
+        })
 })
 
 // This allows the server.js to import (require) the routes

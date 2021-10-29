@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/update_user.js" defer></script>
+    <script src="../js/nav.js" defer></script>
+</head>
+<body>
+    
+
+    <nav id="loadnavbar"></nav>
+    
+    <h1>Update User</h1>
+    <form id="update_user_form">
+
+        <label for="userID">userID:</label>
+        <input type="text" name="userID" id="userId" readonly>
+
+        <label for="firstName">First Name</label>
+        <input type="text" name="firstName" id="firstName">
+        <label for="lastName">Last Name</label>
+        <input type="text" name="lastName" id="lastName">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
+        <label for="accessRights">Access Rights</label>
+        <input type="text" name="accessRights" id="accessRights">
+        <label for="submit">Create user</label>
+        <input type="button" value="Update User" onclick="postUpdateUser()">
+    </form>
+
+</body>
+</html>

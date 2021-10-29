@@ -5,13 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="/frontend/js/author.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/add_author.js"></script>
+    <script src="../js/nav.js" defer></script>
 </head>
 
 <body>
 
-    <form action="api/create/author" method="POST" id="createAuthor">
+    <nav id="loadnavbar"></nav>
+
+    <h1>Add a new Author</h1>
+
+    <form id="createAuthor">
     <label for="name">Author Name</label>
     <input type="name" name="name" id="name">
     <label for="surname">Surname</label>
@@ -23,7 +28,7 @@
     <label for="deathYear">Death year</label>
     <input type="text" name="deathYear" id="deathYear">
     <label for="submit">submit</label>
-    <input type="submit" name="" id="">
+    <input type="submit" onclick="createAuthor()" name="" id="">
     </form>
     
 </body>

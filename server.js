@@ -3,12 +3,8 @@ const express = require("express")
 const server = express()
 const port = 8080
 
-
 //server static front end resources
 server.use(express.static("frontend"))
-
-// server static backend api
-server.use("/api", express.static("backend"))
 
 //Enable middleware for JSON and urlecoded form data
 server.use(express.json())
@@ -18,42 +14,18 @@ server.use(express.urlencoded({extended: true}))
 const bookController = require("./backend/controllers/bookController")
 server.use("/api", bookController)
 
-//link up author controller, this allows us to access
-// things in that folder
-//its like linking to a script src
+//link up author controller, this allows us to access things in that folder
 const authorController = require("./backend/controllers/authorController")
 server.use("/api", authorController)
 
+//link up user controller
 const userController = require("./backend/controllers/userController")
 server.use("/api", userController)
 
+//link up changeLog
+const changeLogController = require("./backend/controllers/changeLogController")
+server.use("/api", changeLogController)
 
-//User login endpoint
-server.post("/api/login",(req,res) => {
-    for (let user of users) {
-        if (user.username == req.body.username && user.password == req.body.password) {
-            // The successful case!
-            res.status(200)
-                .type("json")
-                .send(`
-                    {
-                        "status": "login successful"
-                    }
-                `)
-            // Return (stop) the function here, we are all done.
-            return;
-        }
-    }
-
-    res.status(401)
-        .type("json")
-        .send (`
-            {
-                "status": "login failed:"
-            }
-        `)
-
-})
 
 
 //start the express server

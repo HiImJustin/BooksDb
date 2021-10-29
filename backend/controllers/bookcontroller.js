@@ -5,9 +5,7 @@ const router = express.Router()
 //Access the books model so that we can access 
 // book data in this file.
 const bookModel = require("../models/bookModel")
-const {
-    route
-} = require("./authorController")
+
 
 // Define a /api/books endpoint that responds with an
 // array of all books.
@@ -174,6 +172,55 @@ router.post("/book/add", (req, res) => {
         res.status(500).json("please work for me")
     })
 })
+
+//Update a book
+router.post("/books/update", (req, res) => {
+
+    let book = req.body
+
+    bookModel.updateBook(
+        book.bookID,
+        book.bookTitle,
+        book.originalTitle,
+        book.yearofPublication,
+        book.genre,
+        book.millionsSold,
+        book.languageWritten,
+        book.coverImagePath
+    )
+    .then((result) => {
+        if(result.affectedRows > 0 ) {
+            res.status(200).json("book updated") 
+        }   else {
+            res.status(404).json("book not found") 
+        }
+    })
+    .catch((error) => {
+        console.log(error)
+        res.status(500).json("failed to update book")
+    })
+})
+
+//Delete book
+router.get("/book/delete", (req, res) => {
+
+    let bookId = req.query.id
+/* 
+     let bookId = req.body.bookId
+ */
+    bookModel.deleteBook(bookId)
+        .then((result) => {
+            if(result.affectedRows > 0 ) {
+                res.status(200).json("book deleted successfully")
+            }   else {
+                res.status(404).json("failed to delete book - query error id=" + bookId)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+            res.status(500).json("failed to delete book")
+        })
+    })
 
 //This allows the server.js to import (require)
 // routes define in this file.

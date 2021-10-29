@@ -1,3 +1,7 @@
+* {
+    margin: 0;
+    padding: 0;
+}
 body {
     background-color: skyblue;
 }
@@ -40,4 +44,35 @@ form {
     padding: 5px;
     width: calc(100% / 3);
     margin: 0 auto;
+    justify-content: center;
+}
+h1 {
+    text-align: center;
+}
+
+#loadnavbar {
+    height: 10vh;
+    width: 100%;
+    background-color: skyblue;
+    border: solid 2px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ul {
+    display: flex;
+    flex-direction: row;
+}
+li {
+    list-style: none;
+    text-decoration: none;
+}
+li a {
+    text-decoration: none;
+    color: black;
+    margin: 10px;
+    font-size: 18px;
+}
+li a:hover {
+    color: blue;
 }

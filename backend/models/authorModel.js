@@ -1,6 +1,5 @@
 const db = require("../database")
 
-
 // section for GET BY queries // 
 module.exports.getAllAuthors = () => {
     return db.query("SELECT * FROM author")
@@ -38,4 +37,14 @@ module.exports.getAuthorByDeathYear = (deathYear) => {
 module.exports.createAuthor = (name, surname, nationality, birthYear, deathYear) => {
     return db.query("Insert into author (name, surname, nationality, birthYear, deathYear) "
     + "VALUES(?,?,?,?,?)", [name, surname, nationality, birthYear, deathYear])
+}
+
+// Delete
+module.exports.deleteAuthor = (authorId) => {
+    return db.query("Delete from author where authorID= ?", [authorId])
+}
+
+// Update author
+module.exports.updateAuthor = (authorID, name, surname, nationality, birthYear, deathYear) => {
+    return db.query("UPDATE author SET name = ?, surname = ?, nationality = ?, birthYear = ?, deathYear = ? Where authorID = ?", [name, surname, nationality, birthYear, deathYear, authorID])
 }

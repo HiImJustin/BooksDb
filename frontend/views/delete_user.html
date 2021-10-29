@@ -4,15 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <script src="js/create_users.js" defer></script>
-    <link rel="stylesheet" href="css/style.css">
-
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/delete_user.js"></script>
 </head>
-
 <body>
-    <h1>Create User</h1>
-    <form action="api/users/create" method="POST" id="create_users">
+
+    <section id="delete-user"></section>
+
+    <h1>Delete User</h1>
+    <form id="delete-user-form">
+
+        <label for="userID">userID:</label>
+        <input type="text" name="userID" id="userId" readonly>
+
         <label for="firstName">First Name</label>
         <input type="text" name="firstName" id="firstName">
         <label for="lastName">Last Name</label>
@@ -26,9 +31,10 @@
         <label for="accessRights">Access Rights</label>
         <input type="text" name="accessRights" id="accessRights">
         <label for="submit">Create user</label>
-        <button type="submit">submit</button>
+        <input type="button" value="Delete User" onclick="deleteUser()">
     </form>
 
+  
     
 </body>
 </html>

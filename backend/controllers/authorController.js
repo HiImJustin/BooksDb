@@ -144,6 +144,50 @@ router.post("/create/author", (req, res) => {
 })
 
 
+router.post("/author/delete", (req, res) => {
+
+    let authorId = req.query.id
+/* 
+     let bookId = req.body.bookId
+ */
+    authorModel.deleteAuthor(authorId)
+        .then((result) => {
+            if(result.affectedRows > 0 ) {
+                res.status(200).json("Author Delete Succesfully")
+            }   else {
+                res.status(404).json("failed to delete Author - query error id=" + AuthorId)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+            res.status(500).json("failed to delete Author")
+        })
+    })
+
+router.post("/author/update", (req, res) => {
+
+    let author = req.body
+
+    authorModel.updateAuthor(
+        author.authorId,
+        author.name,
+        author.surname,
+        author.nationality,
+        author.birthYear,
+        author.deathYear
+    )
+    .then((result) => {
+        if(result.affectedRows > 0 ) {
+            res.status(200).json("author updated")
+        }   else (
+            res.status(404).json('author not found')
+        )
+    })
+    .catch((error) => {
+        console.log(error)
+        res.status(500).json("failed to update author")
+    })    
+})
 
 
 
