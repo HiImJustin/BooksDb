@@ -1,3 +1,4 @@
+const { request, response } = require("express")
 const express = require("express")
 
 const router = express.Router()
@@ -169,6 +170,29 @@ router.post("/users/delete", (req, res) => {
             res.status(500).json("failed to delete user - query error")
         })
 })
+
+//login function
+router.post("/users/login", (req, res) => {
+
+    let username = req.body.username;
+    let password = req.body.password;
+
+    if (username && password) {
+		userModel.userLogin(username, password)
+        .then((results) => {
+			if (results.length > 0) {
+				req.session.loggedin = true;
+				req.session.username = username;
+				res.status(200).json("user logged in successfully")
+			}   else {
+				res.status(500).json('wrong username or password')
+			}
+        })
+        .catch((error) => {
+            console.log(error)
+            res.status(500).json("user name or pass wrong idiot")
+        })
+}})
 
 // This allows the server.js to import (require) the routes
 // defined in this file.

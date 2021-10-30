@@ -2,7 +2,7 @@
 const mysql = require ('mysql2');
 
 // Create a connection to the database
-const connnection = mysql.createPool({
+const connection = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'root',
@@ -16,7 +16,7 @@ const connnection = mysql.createPool({
 
 const query = (sql, parameters) => {
     return new Promise((resolve, reject) => {
-        connnection.query(sql, parameters, (error, results) => {
+        connection.query(sql, parameters, (error, results) => {
             if (error) {
                 reject(error)
             } else {

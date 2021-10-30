@@ -53,6 +53,11 @@ module.exports.deleteUser = (userId) => {
     return db.query("Delete from users where userID= ?" , [userId])
 }
 
+//login
+
+module.exports.userLogin = (username, password) => {
+    return db.query('Select * from users WHERE username = ? AND password = ?', [username, password])
+}
 
 
 
