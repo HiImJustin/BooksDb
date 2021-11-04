@@ -1,11 +1,9 @@
 function login() {
-
+    
+    //check if logged in
     let loginform = document.getElementById("login_form")
 
     let formDataJSON = JSON.stringify(Object.fromEntries(new FormData(loginform)));
-    if(loggedin = true) { 
-        console.log("user already logged in")
-    }   else {
         fetch("/api/users/login", {
             method: 'POST',
             headers: {
@@ -17,11 +15,20 @@ function login() {
         .then(res => {
             console.log('login request sent')
             alert(res)
-            window.location.href = '/index.html'
         })
         .catch(err => {
             console.log('login request failed ' + err)
         })
-    }
 }
 
+function logout() {
+    fetch("/api/logout")
+        .then(res => res.json())
+        .then(res => {
+            console.log("logout request sent")
+            alert(res)
+        })
+        .catch(error => {
+            console.log('logout request failed ' + error)
+        })
+}

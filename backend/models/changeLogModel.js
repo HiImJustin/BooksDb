@@ -3,7 +3,7 @@ const db = require ("../database")
 
 //
 
-module.exports.changeLogCreate = ( bookID, userID) => {
+module.exports.changeLogCreate = (bookID, userID) => {
     return db.query("insert into changelog (bookID, userID) "
-    + "VALUES(?,?)", [bookID, userID])
+    + "VALUES (?,?)", [bookID, userID])
 }

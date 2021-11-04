@@ -59,5 +59,9 @@ module.exports.userLogin = (username, password) => {
     return db.query('Select * from users WHERE username = ? AND password = ?', [username, password])
 }
 
+//current user
 
+module.exports.currentUser = (username) => {
+    return db.query('Select userID from users WHERE username = ?', [username])
+}
 

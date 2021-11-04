@@ -25,6 +25,14 @@ function updateBook() {
     let updateBookForm = document.getElementById("update_book")
     
     let formDataJSON = JSON.stringify(Object.fromEntries(new FormData(updateBookForm)));
+    
+    fetch("/api/changelog", {
+        method: "POST",
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: formDataJSON
+    })
 
     fetch("/api/books/update", {
         method: "POST",

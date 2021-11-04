@@ -2,19 +2,31 @@ const express = require("express")
 const session = require('express-session');
 const server = express()
 const port = 8080
+const cookieParser = require('cookie-parser');
+
+const oneDay = 1000 * 60 * 60 * 24;
 
 server.use(session({
 	secret: 'apples',
-	resave: true,
-	saveUninitialized: true
+	resave: false,
+	cookie: {maxAge: oneDay},
+	saveUninitialized: false,
+	name: "uniqueSessionID"
 }));
 
+server.use(cookieParser());
 //server static front end resources
 server.use(express.static("frontend"))
 
 //Enable middleware for JSON and urlecoded form data
 server.use(express.json())
 server.use(express.urlencoded({extended: true}))
+
+//serving public files
+server.use(express.static(__dirname))
+
+//sessions
+
 
 // link up book Controller 
 const bookController = require("./backend/controllers/bookController")

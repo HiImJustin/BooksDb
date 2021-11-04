@@ -4,6 +4,7 @@
 }
 body {
     background-color: skyblue;
+    width: 99%;
 }
 #book-list {
     display: flex;
@@ -52,7 +53,7 @@ h1 {
 
 #loadnavbar {
     height: 10vh;
-    width: 100%;
+    width: 100vw;
     background-color: skyblue;
     border: solid 2px black;
     display: flex;
