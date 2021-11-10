@@ -65,3 +65,7 @@ module.exports.currentUser = (username) => {
     return db.query('Select userID from users WHERE username = ?', [username])
 }
 
+//get users by user name
+module.exports.getUserByUsername = (username) => {
+    return db.query("select * from users where username = ?" , [username])
+}

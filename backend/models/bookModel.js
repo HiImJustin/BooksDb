@@ -10,6 +10,9 @@ module.exports.getAllBooks = () => {
 module.exports.getBookById = (id) => {
     return db.query("SELECT * FROM book WHERE BookId = ?", [id])
 }
+module.exports.getLastBookId = (id) => {
+    return db.query("select bookID from book Order by bookID desc", [id])
+}
 
 module.exports.getBookByTitle = (title) => {
     return db.query("select * from book where bookTitle = ?" , [title])

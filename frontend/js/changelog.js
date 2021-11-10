@@ -4,7 +4,7 @@ function changelog() {
 
     let formDataJSON = JSON.stringify(Object.fromEntries(new FormData(changelogform)));
 
-    fetch("/api/changelog", {
+    fetch("/api/changeLog", {
         method: "POST",
         headers: {
             'content-type': 'application/json'

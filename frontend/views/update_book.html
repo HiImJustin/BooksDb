@@ -7,8 +7,15 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/style.css">
     <script src="../js/update_book.js" defer></script>
+    <script src="../js/nav.js" defer></script>
 </head>
 <body>
+
+
+    <header>
+        <h1>Books DB</h1>
+        <nav id="loadnavbar"></nav>
+    </header>
 
     <h1>Update book</h1>
     <form id="update_book">
@@ -30,8 +37,10 @@
         <input type="text" name="languageWritten" id="languageWritten">
         <label for="coverImagePath">Cover Image</label>
         <input type="text" name="coverImagePath" id="coverImagePath">
+        <input type="text" name="userID" id="userID" hidden>
         <label for="submit">Submit</label>
         <input type="button" value="submit" onclick="updateBook()">
+        
     </form>
     
 </body>

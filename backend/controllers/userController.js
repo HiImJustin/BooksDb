@@ -4,6 +4,11 @@ const router = express.Router()
 
 const userModel = require("../models/userModel")
 
+const bcrypt = require("bcrypt")
+
+//npm install validator
+const validator = require("validator")
+
 // Get all users expect their password
 router.get("/users", (req, res) => {
     userModel.getAllUsers()
@@ -102,15 +107,17 @@ router.post("/users/create", (req, res) => {
     //req.body represents the form field data (json in body of fetch)
     let user = req.body
 
+    // Hash the password before inserting into the database
+    let hashedPassword = bcrypt.hashSync(user.password, 6)
     // Each of the following names refercne the "name"
     // attribute in the inputs of the form.
     userModel.createUser(
-            user.firstName,
-            user.lastName,
-            user.email,
-            user.username,
-            user.password,
-            user.accessRights
+            validator.escape(user.firstName),
+            validator.escape(user.lastName),
+            validator.escape(user.email),
+            validator.escape(user.username),
+            hashedPassword, // we now store the hashed password 
+            validator.escape(user.accessRights)
         )
         .then((result) => {
             res.status(200).json("user created with id " + result.insertId)
@@ -127,14 +134,20 @@ router.post("/users/update", (req, res) => {
     // The req.body represents the posted json data from the form
     let user = req.body
 
-    //each of the names below reference the "name" attritube in the form
+    //If the password does not start a $ then we need to hash it
+    let hashedpassword = user.password
+    if (!user.password.startsWith("$2b$")) {
+        hashedpassword = bcrypt.hashSync(user.password, 6)
+    }
+
+//each of the names below reference the "name" attritube in the form
     userModel.updateUser(
             user.userID,
             user.firstName,
             user.lastName,
             user.email,
             user.username,
-            user.password,
+            hashedpassword, // Use the hases password
             user.accessRights
         )
         .then((result) => {
@@ -171,7 +184,7 @@ router.post("/users/delete", (req, res) => {
 })
 
 //login function
-router.post("/users/login", (req, res) => {
+/* router.post("/users/login", (req, res) => {
 
     let username = req.body.username;
     let password = req.body.password;
@@ -188,6 +201,7 @@ router.post("/users/login", (req, res) => {
                     res.status(200).json("user logged in successfully")
                     console.log(username)
                     console.log(req.cookies)
+                    console.log(req.session)
                 } else {
                     res.status(500).json('wrong username or password')
                 }
@@ -197,43 +211,19 @@ router.post("/users/login", (req, res) => {
                 res.status(500).json("user name or pass wrong idiot")
             })
     }
+}) */
+
+//test if sessions is actually working
+router.get('/secret',(req,res) => {
+    if(req.session.user){
+     result = req.session.user
+     res.status(200).json(result)
+    }  else {
+         console.log("trash")
+    }  
 })
 
-
-//checklogged in
-router.get('/checkloggedin', function (req, res) {
-    // If session authenticated
-    if (req.session && req.session.loggedin && req.session.loggedin === true) {
-        return res.status(200).json({
-            response: 'Authenticated',
-            username: req.session.username
-        });
-    } else {
-        return res.status(400).json({
-            response: 'Not authenticated'
-        });
-    }
-});
-
-router.get("/currentuser/user/:username", (req, res) => {
-    if (req.session && req.session.loggedin === true) {
-        userModel.currentUser(req.params.username)
-        .then((results) => {
-            if (results) {
-                res.status(200).json(results[0])
-            } else {
-                res.status(404).json("no user with name")
-            }
-        })
-        .catch((error) => {
-            console.log(error)
-            res.status(500).json("no user found with name")
-        })
-    }   else {
-        res.status(500).json("not logged in sirrrr")
-    }
-})
-
+// Api endpoint for logout
 router.get('/logout', (req, res) => {
     if (req.session) {
         req.session.destroy(error => {
@@ -246,8 +236,46 @@ router.get('/logout', (req, res) => {
     }
 });
 
+// Jaspers code for the class i missed
+router.post("/users/login" , (req, res) => {
+    // Get the login information
+    let login = req.body
+    // find a user with a matching username
+    userModel.getUserByUsername(login.username)
+        .then((results) => {
+            // Did we find a user with matching username?
+            if (results.length > 0) {
+                // Get the first found users
+                let user = results[0]
+
+                //verify the users password
+                if (bcrypt.compareSync(login.password, user.password)) {
+                    // The user is now authenticated
+
+                    // setup the session
+                    req.session.user = {
+                        userID: user.userID,
+                        accessRights: user.accessRights,
+                    }
+                    res.status(200).json("login successful")
+                } else {
+                    // This else case runs if the password did NOT match.
+                    res.status(401).json("login failed")
+                }
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+            res.status(500).json("failed to login - query error")
+        })
+})
+
+router.post("/users/logout" , (req, res) => {
+    // Destory the session
+    req.session.destroy()
+    res.status(200).json("logged out successfully")
+})
 
 // This allows the server.js to import (require) the routes
 // defined in this file.
-
 module.exports = router

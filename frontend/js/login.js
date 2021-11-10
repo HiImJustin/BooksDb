@@ -9,12 +9,13 @@ function login() {
             headers: {
                 'Content-type': "application/json"
             },
-            body: formDataJSON,
+            body: formDataJSON
         })
         .then(res => res.json())
         .then(res => {
             console.log('login request sent')
             alert(res)
+            window.location.href = "../index.html"
         })
         .catch(err => {
             console.log('login request failed ' + err)
@@ -27,6 +28,7 @@ function logout() {
         .then(res => {
             console.log("logout request sent")
             alert(res)
+            window.location.href = "login.html"
         })
         .catch(error => {
             console.log('logout request failed ' + error)

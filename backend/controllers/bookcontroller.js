@@ -39,6 +39,17 @@ router.get("/books/:id", (req, res) => {
             res.status(500).json("query error")
         })
 })
+//get last book id
+router.get("/book/lastID", (req, res) => {
+    bookModel.getLastBookId(req.params.id)
+        .then((results) => {
+            if (results.length > 0) {
+                res.status(200).json(results[0])
+            } else {
+                res.status(404).json("failed to find last book id")
+            }
+        })
+})
 // defined an epi endpoint /api/book/title/:"title"
 router.get("/book/title/:title", (req, res) => {
     bookModel.getBookByTitle(req.params.title)

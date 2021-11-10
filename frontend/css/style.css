@@ -3,17 +3,109 @@
     padding: 0;
 }
 body {
-    background-color: skyblue;
-    width: 99%;
+    background-color: rgb(224, 216, 216);
+    width: 100vw;
 }
+h1 {
+    text-align: center;
+}
+
+/* Header and navbar styling */
+header {
+    background-color: rgb(109, 4, 4);
+    color: black;
+    display: flex;
+    flex-direction: column;
+    height: 10vh;
+    border: solid 2px black;
+}
+header h1 {
+    font-size: 26px;
+    margin-top: 20px;
+}
+nav {
+    height: 5vh;
+    border-top: solid 2px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(122, 6, 6);
+}
+ul {
+    display: flex;
+    flex-direction: row;
+}
+li {
+    list-style: none;
+    text-decoration: none;
+}
+li a {
+    text-decoration: none;
+    color: black;
+    margin: 10px;
+    font-size: 20px;
+}
+li a:hover {
+    color: blue;
+}
+/* End of header and navbar styling */
+
+
+section h1 {
+    margin-top: 10px;
+}
+
+/* user list styling */
+#user-list {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: fit-content;
+    background-color: white;
+    border: solid 2px black;
+    margin-top: 10px;
+}
+#user-list h1 {
+    border-bottom: solid 2px black;
+}
+.user {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    border-bottom: solid 2px black;
+    width: 100%;
+}
+.user span {
+    margin: 5px;
+    font-size: 20px;
+}
+.user div {
+    margin-left: 4px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.user a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    padding: 2px;
+}
+.user a:hover {
+    color: blue;
+}
+
+/* end of user list styling */
+
+/* Book list styling */
 #book-list {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: start;
-    margin: 20px;
+    margin: 0 auto;
+    width: 40%;
 }
-
 .book {
     background-color: white;
     box-shadow: 2px 2px 10px black;
@@ -35,45 +127,40 @@ body {
 .book h3 {
     font-size: 15px;
 }
-
+/* End of book list styling */
 
 /* user create form */
 form {
     display: flex;
     flex-direction: column;
-    margin: 5px;
     padding: 5px;
     width: calc(100% / 3);
     margin: 0 auto;
-    justify-content: center;
+    width: 460px;
 }
-h1 {
-    text-align: center;
+label {
+    margin-left: 5px;
+}
+/* end user create form */
+
+/* author list styling */
+#author-list {
+    width: 30%;
+    margin: 0 auto;
 }
 
-#loadnavbar {
-    height: 10vh;
-    width: 100vw;
-    background-color: skyblue;
+/* end author list styling */
+
+/* button styling */
+input {
+    margin: 5px;
+    width: 380px;
+    height: 42px;
+    border-radius: 4px;
     border: solid 2px black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding-left: 4px;
 }
-ul {
-    display: flex;
-    flex-direction: row;
-}
-li {
-    list-style: none;
-    text-decoration: none;
-}
-li a {
-    text-decoration: none;
-    color: black;
-    margin: 10px;
-    font-size: 18px;
-}
-li a:hover {
-    color: blue;
+input[type="button"] {
+    height: 44px;
+    width: 385px;
 }
