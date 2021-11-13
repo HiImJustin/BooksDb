@@ -6,7 +6,6 @@ const db = require("../database")
 module.exports.getAllBooks = () => {
     return db.query("SELECT * FROM book")
 }
-
 module.exports.getBookById = (id) => {
     return db.query("SELECT * FROM book WHERE BookId = ?", [id])
 }
@@ -61,4 +60,9 @@ module.exports.updateBook = (bookID, bookTitle, originalTitle, yearofPublication
 // Delete
 module.exports.deleteBook = (bookId) => {
     return db.query("Delete from book where bookID = ?", [bookId])
+}
+
+
+module.exports.allbookinfo = () => {
+    return db.query("select * from book left outer join changelog on book.bookID = changelog.bookID")
 }

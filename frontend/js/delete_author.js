@@ -30,10 +30,10 @@ function deleteAuthor() {
         },
         body: formDataJSON,
     })
-     .then(res => res.json())
+    .then(res => res.json())
     .then(response => {
         alert(response)
         //Redirect
-         /* window.location.href = "author_list.html" */
+        window.location.href = "author_list.html"
     }) 
 }

@@ -45,5 +45,19 @@ router.post("/updateLog", (req, res) => {
     })
 })
 
+router.get("/booklog", (req, res) => {
+    changeLogModel.booklog()
+    .then((results) => {
+        if(results.length > 0) {
+            res.status(200).json(results)
+        }   else {
+                res.status(404).json("failed to find that book")
+        }
+        })
+        .catch((error) => {
+            console.log(error)
+            res.status(500).json("query error")
+        })
+})
 
 module.exports = router

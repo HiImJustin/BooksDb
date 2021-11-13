@@ -24,7 +24,7 @@ server.use((req, res, next) => {
 
 	// Define a list of allowed URL for non-logged in users
 	let allowedURLs = [
-		"/frontend/views/login.html",
+		"/frontend/index.html",
 		"/frontend/js/login.js",
 		"/frontend/css/style.css",
 		"/api/users/login"
@@ -42,7 +42,7 @@ server.use((req, res, next) => {
 			next()
 		} else {
 			// If no allowed - Redirect to the login page
-			res.redirect("/frontend/views/login.html")
+			res.redirect("/frontend/index.html")
 		}
 	}
 }) 

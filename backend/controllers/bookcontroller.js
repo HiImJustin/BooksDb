@@ -5,12 +5,12 @@ const router = express.Router()
 //Access the books model so that we can access 
 // book data in this file.
 const bookModel = require("../models/bookModel")
-
+const changeLogModel = require("../models/changeLogModel")
 
 // Define a /api/books endpoint that responds with an
 // array of all books.
-router.get("/books", (req, res) => {
-    bookModel.getAllBooks()
+router.get("/allbookinfo", (req, res) => {
+    bookModel.allbookinfo()
         .then((results) => {
             res.status(200).json(results)
         })

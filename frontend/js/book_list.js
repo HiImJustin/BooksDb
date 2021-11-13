@@ -1,4 +1,4 @@
-fetch("../api/books")
+fetch("/api/allbookinfo")
     .then(response => response.json())
     .then(books => {
         console.log(books)
@@ -12,10 +12,10 @@ fetch("../api/books")
         <h2>${book.authorID}</h2>
         <h3>${book.yearofPublication}</h3>
         <h3>${book.languageWritten}</h3>
+        <h3>${book.dateChanged}</h3>
         <a href="update_book.html?id=${book.bookID}">Edit</a>
         <a href="delete_book.html?id=${book.bookID}">Delete</a>
     </article>
         `
     }
-
 })

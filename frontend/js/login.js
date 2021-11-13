@@ -2,8 +2,8 @@ function login() {
     
     //check if logged in
     let loginform = document.getElementById("login_form")
-
     let formDataJSON = JSON.stringify(Object.fromEntries(new FormData(loginform)));
+
         fetch("/api/users/login", {
             method: 'POST',
             headers: {
@@ -15,7 +15,7 @@ function login() {
         .then(res => {
             console.log('login request sent')
             alert(res)
-            window.location.href = "../index.html"
+            window.location.href = "/frontend/views/book_list.html"
         })
         .catch(err => {
             console.log('login request failed ' + err)

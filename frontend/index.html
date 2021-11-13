@@ -8,6 +8,8 @@
     <title>Books Db</title>
     <link rel="stylesheet" href="./css/style.css">
     <script src="./js/nav.js" defer> </script>
+    <script src="/frontend/js/login.js" defer></script>
+
 </head>
 
 <body>
@@ -17,9 +19,14 @@
         <nav id="loadnavbar"></nav>
     </header>
 
-    <section>
-        <h1>This is a very boring home page, what should i have here, maybe a collection of famous book and authors</h1>
-    </section>
+    <form id="login_form">
+        <h1>Login</h1>
+        <label for="username">Username:</label>
+        <input type="text" name="username" placeholder="Username" id="username" required>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" placeholder="Password" required>
+        <input type="button" value="Login" onclick="login()">
+    </form>
 
 </body>
 

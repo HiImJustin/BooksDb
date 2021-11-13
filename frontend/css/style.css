@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 body {
     background-color: rgb(224, 216, 216);
@@ -16,15 +17,18 @@ header {
     color: black;
     display: flex;
     flex-direction: column;
-    height: 10vh;
+    height: 14vh;
+    width: 100vw;
     border: solid 2px black;
+    padding: -2px;
 }
 header h1 {
     font-size: 26px;
     margin-top: 20px;
+    margin-bottom: 10px;
 }
 nav {
-    height: 5vh;
+    height: 7vh;
     border-top: solid 2px black;
     display: flex;
     justify-content: center;
@@ -60,6 +64,7 @@ section h1 {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    min-width: fit-content;
     width: 20%;
     height: fit-content;
     background-color: white;

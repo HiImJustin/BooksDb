@@ -50,7 +50,7 @@ if (userId) {
     .then(response => {
         alert(response)
         //Redirect back to user list
-        // window.location.href = "list_users.html"
+        window.location.href = "list_users.html"
     })
 }
 

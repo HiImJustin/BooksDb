@@ -1,4 +1,4 @@
-fetch("../api/users")
+fetch("/api/users")
     .then(res => res.json())
     .then(users => {
         let userListSection = document.getElementById("user-list")

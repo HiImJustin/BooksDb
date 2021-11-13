@@ -23,6 +23,7 @@ function postAddBook() {
             },
             body: formDataJSON,
         })
+        window.location.href = "book_list.html"
 }
 
 //populate add book
