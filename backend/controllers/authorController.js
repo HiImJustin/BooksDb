@@ -8,7 +8,7 @@ const authorModel = require("../models/authorModel")
 
 // Define a /api/authors end point so we can see an
 // array of all authors.
-router.get("/author", (req, res) => {
+router.get("/authors", (req, res) => {
     //Gets the function from authorModel
     authorModel.getAllAuthors()
         .then((results) => {

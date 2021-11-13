@@ -6,9 +6,10 @@ function postAddBook() {
 
     // Convert the user form fields into JSON
     let formDataJSON = JSON.stringify(Object.fromEntries(new FormData(addBookForm)));
+    console.log(formDataJSON)
 
     // Post form data to the API
-    fetch("/api/changeLog", {
+    fetch("/api/changelog", {
         method: "POST",
         headers: {
             'content-type': 'application/json'
@@ -25,6 +26,20 @@ function postAddBook() {
         })
         window.location.href = "book_list.html"
 }
+
+fetch("/api/authors")
+    .then(res => res.json())
+    .then((authors) => {
+        let authorSelect = document.getElementById("author")
+
+        for(let author of authors) {
+            authorSelect.innerHTML 
+            += `<option value = "${author.authorID}">
+                ${author.name + " " + author.surname}
+            </option>`
+        }
+    })
+
 
 //populate add book
 

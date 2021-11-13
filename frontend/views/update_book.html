@@ -11,37 +11,41 @@
 </head>
 <body>
 
+    <section class="page">
 
     <header>
         <h1>Books DB</h1>
         <nav id="loadnavbar"></nav>
     </header>
 
-    <h1>Update book</h1>
-    <form id="update_book">
+        <h1>Update book</h1>
 
-        
-        <input type="text" name="bookID" id="bookID" hidden>
+        <form id="update_book">       
+            <input type="text" name="bookID" id="bookID">
+            <label for="bookTitle">Book Title</label>
+            <input type="text" name="bookTitle" id="bookTitle">
+            <label for="originalTitle">Original Title</label>
+            <input type="text" name="originalTitle" id="originalTitle">
+            <label for="yearofPublication">Year of Publication</label>
+            <input type="text" name="yearofPublication" id="yearofPublication">
+            <label for="genre">Genre</label>
+            <input type="text" name="genre" id="genre">
+            <label for="millionsSold">Millions Sold</label>
+            <input type="text" name="millionsSold" id="millionsSold">
+            <label for="langugageWritten">Language Written</label>
+            <input type="text" name="languageWritten" id="languageWritten">
+            <label for="coverImagePath">Cover Image</label>
+            <input type="text" name="coverImagePath" id="coverImagePath">
+            <input type="text" name="userID" id="userID" hidden>
+            <label for="submit">Submit</label>
+            <input type="button" value="submit" onclick="updateBook()">
+        </form>
 
-        <label for="bookTitle">Book Title</label>
-        <input type="text" name="bookTitle" id="bookTitle">
-        <label for="originalTitle">Original Title</label>
-        <input type="text" name="originalTitle" id="originalTitle">
-        <label for="yearofPublication">Year of Publication</label>
-        <input type="text" name="yearofPublication" id="yearofPublication">
-        <label for="genre">Genre</label>
-        <input type="text" name="genre" id="genre">
-        <label for="millionsSold">Millions Sold</label>
-        <input type="text" name="millionsSold" id="millionsSold">
-        <label for="langugageWritten">Language Written</label>
-        <input type="text" name="languageWritten" id="languageWritten">
-        <label for="coverImagePath">Cover Image</label>
-        <input type="text" name="coverImagePath" id="coverImagePath">
-        <input type="text" name="userID" id="userID" hidden>
-        <label for="submit">Submit</label>
-        <input type="button" value="submit" onclick="updateBook()">
-        
-    </form>
+    </section>
+
+    <section>
+        <nav id="loadfooter"></nav>
+    </section>
     
 </body>
 </html>

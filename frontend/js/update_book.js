@@ -9,6 +9,7 @@ Promise.all([
     fetch(`/api/secret`).then(value => value.json())
 ])
     .then((res) => {
+        console.log(res)
         let book = res[0]
         let user = res[1]
 
@@ -24,19 +25,13 @@ Promise.all([
         })
 }
 
+
+
 function updateBook() {
 
     let updateBookForm = document.getElementById("update_book")
     
     let formDataJSON = JSON.stringify(Object.fromEntries(new FormData(updateBookForm)));
-    
-    fetch("/api/updateLog", {
-        method: "POST",
-        headers: {
-            'content-type': "application/json"
-        },
-        body: formDataJSON,  
-    })
 
     fetch("/api/books/update", {
         method: "POST",

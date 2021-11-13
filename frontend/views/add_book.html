@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,36 +10,49 @@
     <script src="../js/add_book.js"></script>
     <script src="../js/nav.js" defer></script>
 </head>
+
 <body>
+    <section class="page">
 
     <header>
         <h1>Books DB</h1>
         <nav id="loadnavbar"></nav>
     </header>
 
-    <h1>Add book</h1>
-    <form id="add_book">
-        <label for="bookTitle">Book Title</label>
-        <input type="text" name="bookTitle" id="bokTitle">
-        <label for="originalTitle">Original Title</label>
-        <input type="text" name="originalTitle" id="originalTitle">
-        <label for="yearofPublication">Year of Publication</label>
-        <input type="text" name="yearofPublication" id="yearofPubliation">
-        <label for="genre">Genre</label>
-        <input type="text" name="genre" id="genre">
-        <label for="millionsSold">Millions Sold</label>
-        <input type="text" name="millionsSold" id="millionsSold">
-        <label for="langugageWritten">Language Written</label>
-        <input type="text" name="languageWritten" id="languageWritten">
-        <label for="coverImagePath">Cover Image</label>
-        <input type="text" name="coverImagePath" id="coverImagePath">
-        <label for="authorID">Authors Id</label>
-        <input type="text" name="authorID" id="authorID">
-        <input type="text" name="userID" id="userID" hidden>
-        <input type="text" name="bookID" id="bookID" hidden>
-        <label for="submit">Submit</label>
-        <input type="submit" name="submit" onclick="postAddBook()" id="submit">
-    </form>
+        <h1>Add book</h1>
+
+        <form id="add_book">
+            <label for="bookTitle">Book Title</label>
+            <input type="text" name="bookTitle" id="bokTitle">
+            <label for="originalTitle">Original Title</label>
+            <input type="text" name="originalTitle" id="originalTitle">
+            <label for="yearofPublication">Year of Publication</label>
+            <input type="text" name="yearofPublication" id="yearofPubliation">
+            <label for="genre">Genre</label>
+            <input type="text" name="genre" id="genre">
+            <label for="millionsSold">Millions Sold</label>
+            <input type="text" name="millionsSold" id="millionsSold">
+            <label for="langugageWritten">Language Written</label>
+            <input type="text" name="languageWritten" id="languageWritten">
+            <label for="coverImagePath">Cover Image</label>
+            <input type="text" name="coverImagePath" id="coverImagePath">
+
+            <label for="author">Author:</label>
+            <select name="authorID" id="author">
+                <option value="">Select....</option>
+            </select>
+            <input type="text" name="userID" id="userID" hidden>
+            <input type="text" name="bookID" id="bookID" hidden>
+            <label for="submit">Submit</label>
+            <input type="submit" name="submit" onclick="postAddBook()" id="submit">
+        </form>
+
+    </section>
+
+    <section>
+        <nav id="loadfooter"></nav>
+    </section>
 
 </body>
+
 </html>

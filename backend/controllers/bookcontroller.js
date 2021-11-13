@@ -188,7 +188,10 @@ router.post("/book/add", (req, res) => {
 router.post("/books/update", (req, res) => {
 
     let book = req.body
-
+    changeLogModel.updateLogCreate(
+        book.userID,
+        book.bookID
+    )
     bookModel.updateBook(
         book.bookID,
         book.bookTitle,

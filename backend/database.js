@@ -6,7 +6,8 @@ const connection = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'bookdb'
+    database: 'bookdb',
+    dateStrings: 'true'
 })
 
 // This wrapper wil allow the use of promise functions
