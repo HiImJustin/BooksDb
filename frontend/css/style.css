@@ -10,6 +10,19 @@ h1 {
     text-align: center;
     color: black;
 }
+.error-div {
+    display: none;
+}
+input:focus:not(:placeholder-shown):valid {
+    border: solid 2px green;
+}
+input:not(:placeholder-shown):invalid {
+    border: solid 2px red;
+}
+input:not(:placeholder-shown):invalid ~ div {
+    display: grid;
+    color: red;
+}
 .page {
     display: flex;
     flex-direction: column;

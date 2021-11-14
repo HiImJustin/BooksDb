@@ -6,6 +6,8 @@ const router = express.Router()
 // data in this file
 const authorModel = require("../models/authorModel")
 
+const {body, validationResult} = require('express-validator')
+
 // Define a /api/authors end point so we can see an
 // array of all authors.
 router.get("/authors", (req, res) => {
@@ -123,10 +125,19 @@ router.get("/author/deathYear/:deathYear" , (req, res) => {
 
 // Start of add functions //
 
-router.post("/create/author", (req, res) => {
+router.post("/create/author",
 
+    body('name').isLength({min:2}).matches("^[A-Z][a-zA-Z]{1,19}$"),
+    body('surname').isLength({min:2}).matches("^[A-Z][a-zA-Z]{1,19}$"),
+    body('nationality').isLength({min:2}).matches("^[A-Z][a-zA-Z]{1,19}$"),
+    body('birthYear').isLength({min:4, max:4}).matches("^[1-9]{1}[0-9]{3}$"),
+    body("deathYear").isLength({min:4, max:4}).matches("^[1-9]{1}[0-9]{3}$"),
+    (req, res) => {
     let author = req.body
-
+    let errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        return res.status(200).json("Invalid inputs")
+    }
     authorModel.createAuthor(
         author.name,
         author.surname,
@@ -164,10 +175,21 @@ router.post("/author/delete", (req, res) => {
         })
     })
 
-router.post("/author/update", (req, res) => {
+router.post("/author/update",
+
+    body('name').isLength({min:2}).matches("^[A-Z][a-zA-Z]{1,19}$"),
+    body('surname').isLength({min:2}).matches("^[A-Z][a-zA-Z]{1,19}$"),
+    body('nationality').isLength({min:2}).matches("^[A-Z][a-zA-Z]{1,19}$"),
+    body('birthYear').isLength({min:4, max:4}).matches("^[1-9]{1}[0-9]{3}$"),
+    body("deathYear").isLength({min:4, max:4}).matches("^[1-9]{1}[0-9]{3}$"),
+    
+    (req, res) => {
 
     let author = req.body
-
+    let errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        return res.status(200).json("Invalid inputs")
+    }
     authorModel.updateAuthor(
         author.authorId,
         author.name,

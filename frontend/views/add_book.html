@@ -14,35 +14,70 @@
 <body>
     <section class="page">
 
-    <header>
-        <h1>Books DB</h1>
-        <nav id="loadnavbar"></nav>
-    </header>
+        <header>
+            <h1>Books DB</h1>
+            <nav id="loadnavbar"></nav>
+        </header>
 
         <h1>Add book</h1>
 
         <form id="add_book">
-            <label for="bookTitle">Book Title</label>
-            <input type="text" name="bookTitle" id="bokTitle">
-            <label for="originalTitle">Original Title</label>
-            <input type="text" name="originalTitle" id="originalTitle">
-            <label for="yearofPublication">Year of Publication</label>
-            <input type="text" name="yearofPublication" id="yearofPubliation">
-            <label for="genre">Genre</label>
-            <input type="text" name="genre" id="genre">
-            <label for="millionsSold">Millions Sold</label>
-            <input type="text" name="millionsSold" id="millionsSold">
-            <label for="langugageWritten">Language Written</label>
-            <input type="text" name="languageWritten" id="languageWritten">
-            <label for="coverImagePath">Cover Image</label>
-            <input type="text" name="coverImagePath" id="coverImagePath">
 
+        <section>
+            <label for="bookTitle">Book Title</label>
+            <input type="text" name="bookTitle" id="bokTitle" required placeholder="Book Title">
+            <div class="error-div">The Title must start with a captial letter</div>
+        </section>
+
+        <section>
+            <label for="originalTitle">Original Title</label>
+            <input type="text" name="originalTitle" id="originalTitle" required pattern="^[A-Z][a-zA-Z ]{1,19}$"
+            minlength="2" maxlength="19" placeholder="OriginalTitle">
+            <div class="error-div">Original Title must start with a capital letter</div>
+        </section>
+
+        <section>
+            <label for="yearofPublication">Year of Publication</label>
+            <input type="text" name="yearofPublication" placeholder="Year of Publication" id="yearofPubliation" pattern="^[0-9]{4}$" required>
+            <div class="error-div">Date format must be full year example: "2021"</div>
+        </section>
+
+        <section>
+            <label for="genre">Genre</label>
+            <input type="text" name="genre" id="genre" required pattern="^[A-Z][a-zA-Z ]{1,19}$" minlength="2"
+            maxlength="19" placeholder="Genre">
+            <div class="error-div">The Genre must start with a capital</div>
+        </section>
+
+        <section>
+            <label for="millionsSold">Millions Sold</label>
+            <input type="text" name="millionsSold" id="millionsSold" pattern="^[1-9][0-9]{0,4}$" required placeholder="Millions Sold">
+            <div class="error-div">Number cannot start with a 0 and is only allowed upto 5 digits</div>
+        </section>
+
+        <section>
+            <label for="langugageWritten">Language Written</label>
+            <input type="text" name="languageWritten" placeholder="Language written" id="languageWritten" pattern="^[A-Z][a-zA-Z ]{1,19}$" required>
+            <div class="error-div">Must start with a capital</div>
+        </section>
+
+        <section>
+            <label for="coverImagePath">Cover Image</label>
+            <input type="text" name="coverImagePath" id="coverImagePath"
+            placeholder="Cover Image">
+        </section>
+
+        <section>
             <label for="author">Author:</label>
-            <select name="authorID" id="author">
+            <select name="authorID" id="author" required>
                 <option value="">Select....</option>
             </select>
-            <input type="text" name="userID" id="userID" hidden>
-            <input type="text" name="bookID" id="bookID" hidden>
+            <div class="error-div">Please select the correct Author</div>
+        </section>
+
+            <input type="text" name="userID" id="userID">
+            <input type="text" name="bookID" id="bookID">
+
             <label for="submit">Submit</label>
             <input type="submit" name="submit" onclick="postAddBook()" id="submit">
         </form>

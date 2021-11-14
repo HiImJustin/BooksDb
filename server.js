@@ -1,6 +1,6 @@
 const express = require("express")
 const session = require('express-session');
-
+const validator = require("validator")
 const server = express()
 const port = 8080
 

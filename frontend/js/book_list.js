@@ -6,32 +6,35 @@ fetch("/api/allbookinfo")
 
 
 
-        for (let book of books) {
+    for (let book of books) {
 
-            if (book.dateChanged === "null" || book.dateChanged === null || book.dateChanged === "" ||
-                typeof book.dateChanged === undefined) {
-                console.log("deleted")
-                delete book.dateChanged
-            }
-            if (book.dateChanged === undefined) {
-                book.dateChanged = ""
-            }
-           
-           /*  if (book.dateChanged || book.dateCreated)
-            let newDate = new Date(book.dateChanged)
-            console.log(newDate.toDateString())
+        if (book.dateChanged === "null" || book.dateChanged === null 
+            || book.dateChanged === "" || typeof book.dateChanged === undefined) {
+            delete book.dateChanged
+    
+        }
+        if (book.dateChanged === undefined) {
+            book.dateChanged = ""
+        }
 
-            Date.prototype.getDateWithoutTime = function () {
-                return new Date(this.toDateString());
-            } */
+        if (book.dateCreated === "null" || book.dateCreated === null 
+            || book.dateCreated === "" || typeof book.dateCreated === undefined) {
+            delete book.dateCreated
+        }
+        if (book.dateCreated === undefined) {
+            book.dateCreated = ""
+        }
 
-            let dateCreated = book.dateCreated;
-            dateCreated = dateCreated.split(" ")[0];
+        let dateCreated = book.dateCreated;
+        dateCreated = dateCreated.split(" ")[0];
+        console.log(dateCreated)
+        
 
-            let dateChanged = book.dateChanged;
-            dateChanged = dateChanged.split(" ")[0];
+        let dateChanged = book.dateChanged;
+        dateChanged = dateChanged.split(" ")[0];
+        console.log(dateChanged + " results ")
 
-            book_list.innerHTML += `
+        book_list.innerHTML += `
     <article id="book">
         <h1>${book.bookTitle}</h1>
         <h2 hidden>${book.bookID}</h2>

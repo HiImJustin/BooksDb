@@ -40,6 +40,13 @@ function updateBook() {
         },
         body: formDataJSON,
     })
+    fetch("/api/updatelog", {
+        method: "POST",
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: formDataJSON
+    })
     .then(res => res.json())
     .then(response => {
         alert(response)

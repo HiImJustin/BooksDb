@@ -22,7 +22,7 @@ function postCreateUser() {
             console.log("user request sent")
             alert(res)
             //Redirect back to user list
-            window.location.href = "list_users.html"
+            /* window.location.href = "list_users.html" */
         })
         .catch(err => {
             //handle the error from the server

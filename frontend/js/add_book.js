@@ -9,14 +9,6 @@ function postAddBook() {
     console.log(formDataJSON)
 
     // Post form data to the API
-    fetch("/api/changelog", {
-        method: "POST",
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: formDataJSON
-    })
-
     fetch("/api/book/add",{
             method: "POST",
             headers: {
@@ -24,7 +16,14 @@ function postAddBook() {
             },
             body: formDataJSON,
         })
-        window.location.href = "book_list.html"
+       /*  fetch("/api/changelog", {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: formDataJSON
+        }) */
+        /* window.location.href = "book_list.html" */
 }
 
 fetch("/api/authors")
@@ -51,7 +50,7 @@ fetch("/api/authors")
             let book = res[0]
             let user = res[1]
             console.log(res)
-            document.getElementById("bookID").value = book.bookID
+            document.getElementById("bookID").value = book.bookID + 1;
             document.getElementById("userID").value = user.userID
         })
 

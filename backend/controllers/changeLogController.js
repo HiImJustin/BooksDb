@@ -2,10 +2,7 @@ const express = require("express")
 
 const router = express.Router()
 
-
 const changeLogModel = require("../models/changeLogModel")
-const bookModel = require("../models/bookModel")
-const userModel = require("../models/userModel")
 
 router.post("/changelog", (req, res) => {
     
@@ -13,8 +10,8 @@ router.post("/changelog", (req, res) => {
     let user = req.body
 
     changeLogModel.changeLogCreate(
-        book.bookID,
-        user.userID
+        user.userID,
+        book.bookID
     )
     .then((results) => {
         res.status(200).json("change log created" + results.insertId)
@@ -27,15 +24,16 @@ router.post("/changelog", (req, res) => {
 
 router.post("/updatelog", (req, res) => {
     
+    let book = req.body
     let user = req.body
     
     changeLogModel.updateLogCreate(
-        user.bookID,
-        user.userID
+        user.userID,
+        book.bookID
     )
     .then((results) => {
         console.log(results)
-        res.status(200).json("change log created" + results.insertId)
+        res.status(200).json("change log updated " + results.insertId)
     })
     .catch((error) => {
         console.log(error)

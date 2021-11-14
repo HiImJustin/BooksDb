@@ -62,7 +62,6 @@ module.exports.deleteBook = (bookId) => {
     return db.query("Delete from book where bookID = ?", [bookId])
 }
 
-
 module.exports.allbookinfo = () => {
     return db.query("select book.bookID, book.bookTitle, book.authorID, book.yearofPublication, changelog.userID, "
     + "changelog.dateCreated, changelog.dateChanged from book left join changelog on book.bookID = changelog.bookID")

@@ -6,6 +6,7 @@ const userModel = require("../models/userModel")
 
 const bcrypt = require("bcrypt")
 
+const { body, validationResult, check } = require('express-validator');
 //npm install validator
 const validator = require("validator")
 
@@ -103,16 +104,29 @@ router.get("/users/accessRights/:accessRights", (req, res) => {
 })
 
 //Create new user
-router.post("/users/create", (req, res) => {
+router.post("/users/create",
+    //validation checking
+    body('firstName').isLength({ min: 5}).matches("^[A-Z][a-zA-Z ]{1,19}$"),
+    body('lastName').isLength({ min: 5}).matches("^[A-Z][a-zA-Z ]{1,19}$"),
+    body('email').isLength({min: 2}).isEmail,
+    body('username').isLength({min: 2}).matches("^[A-Z][a-zA-Z ]{1,19}$"),
+    body('password').isStrongPassword,
+    (req, res) => {
     //req.body represents the form field data (json in body of fetch)
     let user = req.body
-
+    // Finds the validation errors in this request and 
+    // wraps them in an object with handy functions
+    let errors = validationResult(req);
+    if (!errors.isEmpty()) {
+    // Stops the data from being sent if invalid ISNT empty
+    return res.status(200).json("invalid inputs")
+    }
     // Hash the password before inserting into the database
     let hashedPassword = bcrypt.hashSync(user.password, 6)
-    // Each of the following names refercne the "name"
+    // Each of the following names refercne name=""
     // attribute in the inputs of the form.
     userModel.createUser(
-            validator.escape(user.firstName),
+      validator.escape(user.firstName),
             validator.escape(user.lastName),
             validator.escape(user.email),
             validator.escape(user.username),
@@ -125,12 +139,18 @@ router.post("/users/create", (req, res) => {
         .catch((error) => {
             console.log(error)
             res.status(500).json("query i hate this error - failed to create user")
-        })
-
+    })
 })
 
 //Updates a user
-router.post("/users/update", (req, res) => {
+router.post("/users/update",
+
+    body('firstName').isLength({ min: 5}).matches("^[A-Z][a-zA-Z ]{1,19}$"),
+    body('lastName').isLength({ min: 5}).matches("^[A-Z][a-zA-Z ]{1,19}$"),
+    body('email').isLength({min: 2}).isEmail,
+    body('username').isLength({min: 2}).matches("^[A-Z][a-zA-Z ]{1,19}$"),
+    body('password').isStrongPassword,
+    (req, res) => {
     // The req.body represents the posted json data from the form
     let user = req.body
 
