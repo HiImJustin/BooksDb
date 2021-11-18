@@ -21,7 +21,6 @@ server.use(session({
 server.use((req, res, next) => {
 	// The user is logged in if they have session data
 	let userLoggedIn = req.session.user != null
-
 	// Define a list of allowed URL for non-logged in users
 	let allowedURLs = [
 		"/frontend/index.html",
@@ -46,7 +45,6 @@ server.use((req, res, next) => {
 		}
 	}
 }) 
-
 //Enable middleware for JSON and urlecoded form data
 server.use(express.json())
 server.use(express.urlencoded({extended: true}))
@@ -75,6 +73,10 @@ server.use("/api", userController)
 //link up changeLog
 const changeLogController = require("./backend/controllers/changeLogController");
 server.use("/api", changeLogController)
+
+//link up coverimageController
+const coverImageController = require("./backend/controllers/coverImageController")
+server.use("/api", coverImageController)
 
 //start the express server
 server.listen(port, () => {

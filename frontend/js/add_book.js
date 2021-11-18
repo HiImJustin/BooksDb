@@ -16,14 +16,14 @@ function postAddBook() {
             },
             body: formDataJSON,
         })
-       /*  fetch("/api/changelog", {
+        /* fetch("/api/changelog", {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
             },
             body: formDataJSON
         }) */
-        /* window.location.href = "book_list.html" */
+        window.location.href = "book_list.html"
 }
 
 fetch("/api/authors")
@@ -37,9 +37,22 @@ fetch("/api/authors")
                 ${author.name + " " + author.surname}
             </option>`
         }
+})
+
+fetch("/api/coverimages")
+    .then(res => res.json())
+    .then((images) => {
+        let coverImage = document.getElementById("coverimagepath")
+
+        for (let image of images) {
+            console.log(image)
+            coverImage.innerHTML 
+            += `<option value = "${image.coverImagePath}">
+                ${image.coverImagePath}
+                </option>
+            `
+        }
     })
-
-
 //populate add book
 
     Promise.all([
@@ -49,8 +62,6 @@ fetch("/api/authors")
         .then((res) => {
             let book = res[0]
             let user = res[1]
-            console.log(res)
             document.getElementById("bookID").value = book.bookID + 1;
             document.getElementById("userID").value = user.userID
-        })
-
+    })

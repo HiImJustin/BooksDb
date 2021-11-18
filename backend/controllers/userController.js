@@ -6,9 +6,10 @@ const userModel = require("../models/userModel")
 
 const bcrypt = require("bcrypt")
 
-const { body, validationResult, check } = require('express-validator');
 //npm install validator
 const validator = require("validator")
+const { validateUser } = require("../models/Validator")
+const {body, validationResult, check} = require('express-validator');
 
 // Get all users expect their password
 router.get("/users", (req, res) => {
@@ -104,63 +105,50 @@ router.get("/users/accessRights/:accessRights", (req, res) => {
 })
 
 //Create new user
-router.post("/users/create",
-    //validation checking
-    body('firstName').isLength({ min: 5}).matches("^[A-Z][a-zA-Z ]{1,19}$"),
-    body('lastName').isLength({ min: 5}).matches("^[A-Z][a-zA-Z ]{1,19}$"),
-    body('email').isLength({min: 2}).isEmail,
-    body('username').isLength({min: 2}).matches("^[A-Z][a-zA-Z ]{1,19}$"),
-    body('password').isStrongPassword,
-    (req, res) => {
+router.post("/users/create", validateUser, (req, res) => {
     //req.body represents the form field data (json in body of fetch)
     let user = req.body
-    // Finds the validation errors in this request and 
-    // wraps them in an object with handy functions
-    let errors = validationResult(req);
-    if (!errors.isEmpty()) {
-    // Stops the data from being sent if invalid ISNT empty
-    return res.status(200).json("invalid inputs")
-    }
     // Hash the password before inserting into the database
-    let hashedPassword = bcrypt.hashSync(user.password, 6)
-    // Each of the following names refercne name=""
-    // attribute in the inputs of the form.
+    let hashedPassword = bcrypt.hashSync(user.password, 5)
+    // If user is not admin, stop the create new user
+    if(req.session.user.accessRights === "Admin") {
+        console.log("user is an admin")
+    }   else {
+        return console.log('not an admin')
+    }
+    // Each of the following names refercne the "name" attribute in the inputs of the form.
     userModel.createUser(
-      validator.escape(user.firstName),
+            validator.escape(user.firstName),
             validator.escape(user.lastName),
             validator.escape(user.email),
             validator.escape(user.username),
             hashedPassword, // we now store the hashed password 
             validator.escape(user.accessRights)
         )
-        .then((result) => {
-            res.status(200).json("user created with id " + result.insertId)
-        })
-        .catch((error) => {
-            console.log(error)
-            res.status(500).json("query i hate this error - failed to create user")
+        .then((results) => {
+            if(results.affectedRows > 0) {
+            res.status(200).json("user created with id " + results.insertId)
+        } else {
+            res.status(404).json("user not created")
+        }
     })
+    .catch((error) => {
+        console.log(error)
+        res.status(500).json("query i hate this error - failed to create user")
+    })
+
 })
 
 //Updates a user
-router.post("/users/update",
-
-    body('firstName').isLength({ min: 5}).matches("^[A-Z][a-zA-Z ]{1,19}$"),
-    body('lastName').isLength({ min: 5}).matches("^[A-Z][a-zA-Z ]{1,19}$"),
-    body('email').isLength({min: 2}).isEmail,
-    body('username').isLength({min: 2}).matches("^[A-Z][a-zA-Z ]{1,19}$"),
-    body('password').isStrongPassword,
-    (req, res) => {
+router.post("/users/update", validateUser, (req, res) => {
     // The req.body represents the posted json data from the form
     let user = req.body
-
     //If the password does not start a $ then we need to hash it
     let hashedpassword = user.password
     if (!user.password.startsWith("$2b$")) {
         hashedpassword = bcrypt.hashSync(user.password, 6)
     }
-
-//each of the names below reference the "name" attritube in the form
+    //each of the names below reference the "name" attritube in the form
     userModel.updateUser(
             user.userID,
             user.firstName,

@@ -1,13 +1,10 @@
 const express = require("express")
-//Create a router so that we can define API
-// routes in this file.
+//Create a router so that we can define API routes in this file.
 const router = express.Router()
-//Access the books model so that we can access 
-// book data in this file.
+//Access the books model so that we can access book data in this file.
 const bookModel = require("../models/bookModel")
-const changeLogModel = require("../models/changeLogModel");
-const {body, validationResult, check} = require('express-validator');
-const Joi = require('joi')
+const { validateBook } = require("../models/Validator");
+const changelogModel = require("../models/changeLogModel");
 // Define a /api/books endpoint that responds with an
 // array of all books.
 router.get("/allbookinfo", (req, res) => {
@@ -67,22 +64,6 @@ router.get("/book/title/:title", (req, res) => {
         })
 })
 
-// defined an api endpoing /api/book/ogTitle/:ogTitle
-router.get("/book/ogTitle/:ogTitle", (req, res) => {
-    bookModel.getBookByOgTitle(req.params.ogTitle)
-        .then((ogTitle) => {
-            if (ogTitle.length > 0) {
-                res.status(200).json(ogTitle[0])
-            } else {
-                res.status(404).json("no book found with that title")
-            }
-        })
-        .catch((error) => {
-            console.log(error)
-            res.status(500).json("no book found with that original title")
-        })
-})
-
 //api endpoint /api/book/yearOfPublication/:pub
 router.get("/book/yearOfPublication/:pub", (req, res) => {
     bookModel.getBookByPublicationYear(req.params.pub)
@@ -98,6 +79,7 @@ router.get("/book/yearOfPublication/:pub", (req, res) => {
             res.status(500).json("failed to find a book with that release year")
         })
 })
+
 // genre api endpoint /api/book/genre/:genre
 router.get("/book/genre/:genre", (req, res) => {
     bookModel.getBookByGenre(req.params.genre)
@@ -113,39 +95,6 @@ router.get("/book/genre/:genre", (req, res) => {
             res.status(404).json("that genre doesnt exists dummy")
         })
 })
-
-//yes
-router.get("/book/sold/:sold", (req, res) => {
-    bookModel.getBookByMillionsSold(req.params.sold)
-        .then((results) => {
-            if (results.length > 0) {
-                res.status(200).json(results)
-            } else {
-                res.status(404).json("no book found with that amount of sales")
-            }
-        })
-        .catch((error) => {
-            console.log(error)
-            res.status(500).json("no book found that matches that sale data")
-        })
-})
-
-//langugage written api
-router.get("/book/languageWritten/:lang", (req, res) => {
-    bookModel.getBookBylanguage(req.params.lang)
-        .then((results) => {
-            if (results.length > 0) {
-                res.status(200).json(results)
-            } else {
-                res.status(404).json("that language wasnt found")
-            }
-        })
-        .catch((error) => {
-            console.log(error)
-            res.status(500).json("that language wasnt found")
-        })
-})
-
 
 router.get("/book/author/:author", (req, res) => {
     bookModel.getBookByAuthor(req.params.author)
@@ -163,10 +112,10 @@ router.get("/book/author/:author", (req, res) => {
 })
 
 // ADD BOOK //
-router.post("/book/add",(req, res) => {
+router.post("/book/add", validateBook, (req, res) => {
 
-let book = req.body
-
+    let book = req.body
+    
     bookModel.addBook(
             book.bookTitle,
             book.originalTitle,
@@ -177,6 +126,11 @@ let book = req.body
             book.coverImagePath,
             book.authorID
         )
+    changelogModel.changeLogCreate(
+        book.bookID,
+        book.userID,
+        book.dateCreated
+    )
         .then((results) => {
             res.status(200).json("book created with id " + results.insertId)
         })
@@ -187,17 +141,7 @@ let book = req.body
 })
 
 //Update a book
-router.post("/books/update",
-
-    body('bookTitle').isLength({min:2}).matches("^[A-Z][a-zA-Z]{1,19}$"),
-    body('originalTitle').isLength({min:2}).matches("^[A-Z][a-zA-Z]{1,19}$"),
-    body('yearofPublication').isLength({min:2}).matches("^[0-9]{4}$"),
-    body('genre').isLength({min:4}),
-    body('millionsSold').isLength({min:4, max:4}).matches("^[1-9][0-9]{0,4}$"),
-    body("languageWritten").isLength({min:4, max:4}).matches("^[A-Z][a-zA-Z]{1,19}$"),
-    body('coverImagePath').isLength({min:1}),
-
-(req, res) => {
+router.post("/books/update", validateBook, (req, res) => {
 
     let book = req.body
 
@@ -244,6 +188,9 @@ router.get("/book/delete", (req, res) => {
             res.status(500).json("failed to delete book")
         })
 })
+
+ 
+  
 
 //This allows the server.js to import (require)
 // routes define in this file.

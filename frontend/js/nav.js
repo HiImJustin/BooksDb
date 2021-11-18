@@ -10,4 +10,19 @@ fetch("../views/footer.html")
     .then(text => {
         let footer = document.getElementById("loadfooter")
         footer.innerHTML += text
-    }) 
+})
+function sleep (time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  }
+
+  sleep(0.1).then(() => {
+    fetch("/api/secret")
+    .then(res => res.json())
+    .then(loggedin => {
+        if(loggedin) {
+            document.getElementById("loginnav").innerHTML = "logout"
+        }
+    })
+});
+
+

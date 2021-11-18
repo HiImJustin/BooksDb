@@ -8,7 +8,7 @@ body {
 }
 h1 {
     text-align: center;
-    color: black;
+    margin-bottom: 10px;
 }
 .error-div {
     display: none;
@@ -28,17 +28,19 @@ input:not(:placeholder-shown):invalid ~ div {
     flex-direction: column;
     min-height: 110vh;
     height: fit-content;
-    width: 90%;
-    display: flex;
+    width: 85%;
     margin: 0 auto;
     /* background: linear-gradient(to bottom right, rgb(227, 227, 227), rgb(225, 225, 225), rgb(222, 222, 222)); */
-    background-color: white;
+    background-color: rgb(218, 218, 218);
     box-shadow: 0px 0px 60px -10px rgb(8, 8, 8) ;
+}
+#logout_form {
+    display: none;
 }
 
 /* Header and navbar styling */
 header {
-    background-color: #ffffff;
+    background-color: rgb(102, 76, 218);
     color: rgb(0, 0, 0);
     display: flex;
     flex-direction: row;
@@ -46,15 +48,16 @@ header {
     width: 100%;
     margin: 0 auto;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     border-bottom: solid 1px black;
     margin-bottom: 20px;
 }
 header > h1 {
-    font-size: 26px;
-    margin-right: 80px;
+    font-size: 28px;
+    margin-left: 150px;
+    margin-right: 50px;
 }
-#loadnavbar nav {
+#loadnavbar {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -67,66 +70,67 @@ ul {
 li {
     list-style: none;
     text-decoration: none;
+    margin: 0px 10px 0px 10px;
 }
-li a {
+header li a {
     text-decoration: none;
-    color: black;
-    margin: 10px;
+    color: rgb(0, 0, 0);
     font-size: 20px;
+    padding: 10px;
+    margin: 0;
 }
 li a:hover {
     color: blue;
+    border: solid 1px black;
+}
+a {
+    text-decoration: none;
 }
 /* End of header and navbar styling */
 
 /* footer styling */
 #loadfooter {
-    height: 20vh;
-    width: 100%;
-    background-color: #141850;
+    height: 15vh;
+    width: 85%;
+    background-color: rgb(102, 76, 218);
+    margin: 0 auto;
+    border-top: solid 1px black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: -10px 40px 65px 1px rgb(8, 8, 8);
+}
+#loadfooter li a {
+    color: black;
 }
 /* end of footer stlying */
 
 /* user list styling */
 #user-list {
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    min-width: fit-content;
-    width: 20%;
-    height: fit-content;
     background-color:white;
-    border: solid 2px black;
-    margin-top: 10px;
-    box-shadow: black 2px 3px;
 }
-#user-list h1 {
-    border-bottom: solid 2px black;
-}
-.user {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    border-bottom: solid 2px black;
-    width: 100%;
-}
-.user span {
-    margin: 5px;
-    font-size: 20px;
-}
-.user div {
-    margin-left: 4px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-.user a {
+#user-list a {
     text-decoration: none;
     color: black;
     font-size: 18px;
     padding: 2px;
 }
-.user a:hover {
+#user-list a:hover {
     color: blue;
+}
+#update_user_form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+select {
+    margin: 5px;
+    width: 380px;
+    height: 42px;
+    border-radius: 4px;
+    border: solid 2px black;
+    padding-left: 4px;
 }
 
 /* end of user list styling */
@@ -134,32 +138,94 @@ li a:hover {
 /* Book list styling */
 #book-list {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
-    justify-content: start;
     margin: 0 auto;
-    width: 40%;
+    width: 90%;
+    padding-left: 50px;
+}
+#book > img {
+    height: 100%;
+    width: 100%;
+    position: absolute;
 }
 #book {
     background-color: rgb(231, 231, 231);
     box-shadow: 2px 2px 10px black;
-    padding:  20px;
     font-family: Arial, Helvetica, sans-serif;
     border-radius: 5px;
     border: 2px solid black;
-    margin: 5px;
+    margin: 25px;
+    width: 300px;
+    height: 300px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
 }
-#book > * {
+#book > h1, h2, h3, a {
+    padding: 5px;
     margin: 10px;
+    color: white;
+}
+#book:hover img {
+    opacity: 0.1;
+    z-index: -1;
+}
+#book:hover {
+    background-color: black;
+    color: white;
+    z-index: 2;
 }
 #book h1 {
     font-size: 20px;
+    text-align: start;
 }
 #book h2 {
     font-size: 15px;
 }
 #book h3 {
     font-size: 15px;
+}
+
+#delete-book-list {
+    display: flex;
+    justify-content: center;
+}
+book-list input[tyep="button"] {
+    height: 20px;
+    width: 100px;
+}
+#delete-book {
+    background-color: rgb(231, 231, 231);
+    box-shadow: 2px 2px 10px black;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 5px;
+    border: 2px solid black;
+    margin: 25px;
+    width: 400px;
+    height: 400px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+#delete-book > h1, h2, h3, a {
+    padding: 5px;
+    margin: 10px;
+    color: white;
+}
+#delete-book img {
+    opacity: 0.1;
+    z-index: -1;
+}
+#delete-book {
+    background-color: black;
+    color: white;
+    z-index: 2;
+}
+#delete-book > img {
+    height: 100%;
+    width: 100%;
+    position: absolute;
 }
 /* End of book list styling */
 
@@ -189,8 +255,8 @@ table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
-  }
-  
+}
+
   td, th {
     border: 1px solid #dddddd;
     text-align: left;
@@ -200,7 +266,11 @@ table {
   tr:nth-child(even) {
     background-color: #dddddd;
   }
-
+td > a {
+    color: black;
+    margin: 0;
+    padding: 0;
+}
 /* end author list styling */
 
 /* button styling */
@@ -214,5 +284,5 @@ input {
 }
 input[type="button"] {
     height: 44px;
-    width: 385px;
+    width: 382px;
 }

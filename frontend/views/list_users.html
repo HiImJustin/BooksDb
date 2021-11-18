@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,19 +10,30 @@
     <script src="../js/list_users.js" defer></script>
     <script src="../js/nav.js"></script>
 </head>
+
 <body>
 
     <section class="page">
-        
-    <header>
-        <h1>Books DB</h1>
-        <nav id="loadnavbar"></nav>
-    </header>
 
-    
-        
-        <section id="user-list">
+        <header>
+            <h1>Books DB</h1>
+            <nav id="loadnavbar"></nav>
+        </header>
+
+        <section>
             <h1>User Details</h1>
+            <table id="user-list">
+                <tr>
+                    <th>User ID</th>
+                    <th>First Name</th>
+                    <th>Surname</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Access Rights</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </table>
         </section>
 
     </section>
@@ -29,6 +41,7 @@
     <section>
         <nav id="loadfooter"></nav>
     </section>
-    
+
 </body>
+
 </html>

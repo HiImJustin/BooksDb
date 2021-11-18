@@ -1,10 +1,7 @@
 fetch("/api/allbookinfo")
     .then(response => response.json())
     .then(books => {
-        console.log(books)
         let book_list = document.getElementById("book-list")
-
-
 
     for (let book of books) {
 
@@ -27,15 +24,13 @@ fetch("/api/allbookinfo")
 
         let dateCreated = book.dateCreated;
         dateCreated = dateCreated.split(" ")[0];
-        console.log(dateCreated)
         
-
         let dateChanged = book.dateChanged;
         dateChanged = dateChanged.split(" ")[0];
-        console.log(dateChanged + " results ")
 
         book_list.innerHTML += `
     <article id="book">
+        <img id="img" src="../images/${book.coverImagePath}.jpg">
         <h1>${book.bookTitle}</h1>
         <h2 hidden>${book.bookID}</h2>
         <h2 hidden>${book.authorID}</h2>
@@ -49,3 +44,4 @@ fetch("/api/allbookinfo")
         `
     }
 })
+

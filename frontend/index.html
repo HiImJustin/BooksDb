@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Books Db</title>
     <link rel="stylesheet" href="./css/style.css">
-    <script src="./js/nav.js" defer> </script>
+    <script src="./js/nav.js"></script>
     <script src="/frontend/js/login.js" defer></script>
 
 </head>
@@ -28,6 +28,10 @@
             <label for="password">Password:</label>
             <input type="password" name="password" id="password" placeholder="Password" required>
             <input type="button" value="Login" onclick="login()">
+        </form>
+
+        <form id="logout_form">
+            <input type="button" onclick="logout()" value="Logout">
         </form>
         
     </section>

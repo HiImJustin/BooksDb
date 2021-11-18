@@ -29,16 +29,16 @@
             
             <section>
                 <label for="bookTitle">Book Title</label>
-                <input type="text" name="bookTitle" id="bookTitle" required pattern="^[A-Z][a-zA-Z ]{1,19}$" minlength="2"
-                maxlength="19" placeholder="Book Title">
-                <div class="error-div">The Title must start with a captial letter</div>
+                <input type="text" name="bookTitle" id="bookTitle" required pattern="^[a-zA-Z ,]{1,48}$" minlength="2"
+                maxlength="48" placeholder="Book Title">
+                <div class="error-div">Must contain only normal characters and between 1 and 19 characters long</div>
             </section>
     
             <section>
                 <label for="originalTitle">Original Title</label>
-                <input type="text" name="originalTitle" id="originalTitle" required pattern="^[A-Z][a-zA-Z ]{1,19}$"
-                minlength="2" maxlength="19" placeholder="OriginalTitle">
-                <div class="error-div">Original Title must start with a capital letter</div>
+                <input type="text" name="originalTitle" id="originalTitle" required pattern="^[a-zA-Z ,]{1,48}$"
+                minlength="2" maxlength="48" placeholder="OriginalTitle">
+                <div class="error-div">Must contain only normal characters and between 1 and 19 characters long</div>
             </section>
     
             <section>
@@ -49,9 +49,9 @@
     
             <section>
                 <label for="genre">Genre</label>
-                <input type="text" name="genre" id="genre" required pattern="^[A-Z][a-zA-Z ]{1,19}$" minlength="2"
+                <input type="text" name="genre" id="genre" required pattern="^[a-zA-Z ]{1,19}$" minlength="2"
                 maxlength="19" placeholder="Genre">
-                <div class="error-div">The Genre must start with a capital</div>
+                <div class="error-div">Must contain only normal characters and between 1 and 19 characters long</div>
             </section>
     
             <section>
@@ -62,8 +62,8 @@
     
             <section>
                 <label for="langugageWritten">Language Written</label>
-                <input type="text" name="languageWritten" placeholder="Language written" id="languageWritten" pattern="^[A-Z][a-zA-Z ]{1,19}$" required>
-                <div class="error-div">Must start with a capital</div>
+                <input type="text" name="languageWritten" placeholder="Language written" id="languageWritten" pattern="^[a-zA-Z ]{1,19}$" required>
+                <div class="error-div">Must contain only normal characters and between 1 and 19 characters long</div>
             </section>
     
             <section>
@@ -80,8 +80,6 @@
                 <div class="error-div">Please select the correct Author</div>
             </section>
 
-            <label for="coverImagePath">Cover Image</label>
-            <input type="text" name="coverImagePath" id="coverImagePath">
             <input type="text" name="userID" id="userID" hidden>
             <label for="submit">Submit</label>
             <input type="button" value="submit" onclick="updateBook()">
@@ -89,9 +87,9 @@
 
     </section>
 
-    <section>
+    <div>
         <nav id="loadfooter"></nav>
-    </section>
+    </div>
     
 </body>
 </html>

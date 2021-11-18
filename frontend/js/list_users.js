@@ -6,15 +6,16 @@ fetch("/api/users")
         for (let user of users) {
             userListSection.innerHTML += `
             <article class="user">
-                <span>Id: ${user.userId}</span>
-                <span>${user.firstName}</span>
-                <span>${user.lastName}</span>
-                <span>${user.username}</span>
-                <span>${user.email}</span>
-                <div>
-                <a href="update_user.html?id=${user.userId}">Edit</a>
-                <a href="delete_user.html?id=${user.userId}">Delete</a>
-                </div>
+                <tr>
+                    <td>${user.userId}</td>
+                    <td>${user.firstName}</td>
+                    <td>${user.lastName}</td>
+                    <td>${user.username}</td>
+                    <td>${user.email}</td>
+                    <td>${user.accessRights}</td>
+                    <td><a href="update_user.html?id=${user.userId}">Edit</a></td>
+                    <td><a href="delete_user.html?id=${user.userId}">Delete</a></td>
+                </tr>
             </article>
             `
         }

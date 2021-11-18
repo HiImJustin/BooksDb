@@ -11,18 +11,17 @@ Promise.all([
         let book = res[0]
         let author = res[1]
         console.log(book)
-        console.log(author)
 
         document.getElementById("delete-book-list").innerHTML += `
-        <article class="book" id="update-book">
+        <article id="delete-book">
+            <img id="img" src="../images/${book.coverImagePath}.jpg">
             <h1>${book.bookTitle}</h1>
             <h2>${book.originalTitle}</h2>
             <h3>${book.yearofPublication}</h3>
             <h3>${book.genre}</h3>
             <h3>${book.languageWritten}</h3>
-            <h3>${author.name}</h3>
-            <input type="button" id="delete-book" onclick="deleteBook()" value="Delete">
-            <input type="button" id="cancel-delete-book" value="Cancel">
+            <input type="button" id="delete" onclick="deleteBook()" value="Delete">
+            <input type="button" id="cancel-delete-book" onclick="cancel()" value="Cancel">
         </article>
             `
     })
@@ -44,4 +43,9 @@ function deleteBook() {
         .catch(error => {
             console.log("couldnt delete book" + error)
         })
+}
+function cancel() {
+    if(cancel) {
+        window.location.href = "book_list.html"
+    }
 }
