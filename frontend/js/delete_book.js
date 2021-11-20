@@ -2,7 +2,7 @@
 let urlParamters = new URLSearchParams(window.location.search)
 let authorID = urlParamters.get("id")
 let bookID = urlParamters.get("id")
-
+//Promise all to get book data by bookID and authorID
 Promise.all([
         fetch(`/api/books/${bookID}`).then(value => value.json()),
         fetch(`/api/author/${authorID}`).then(value => value.json())
@@ -26,6 +26,7 @@ Promise.all([
             `
     })
 
+//Function to delete a book
 function deleteBook() {
     const deleteMethod = {
         method: 'GET',
@@ -33,17 +34,20 @@ function deleteBook() {
             'Content-type': 'application/json'
         }
     }
-
-    fetch('/api/book/delete?id=' + bookID, deleteMethod)
-        .then(res => res.json())
-        .then(res => {
-            console.log("book deleted succesfully")
-            window.location.href = "book_list.html"
-        })  
-        .catch(error => {
-            console.log("couldnt delete book" + error)
-        })
+//Uses the deleteMethod to fetch the data to delete rather than using formdata to delete
+fetch('/api/book/delete?id=' + bookID, deleteMethod)
+    .then(res => res.json())
+    .then(res => {
+        console.log("book deleted succesfully")
+        //handles the response from the server
+        alert(res)
+        window.location.href = "book_list.html"
+    })  
+    .catch(error => {
+        console.log("couldnt delete book" + error)
+    })
 }
+//Cancel button to exit out of the delete page
 function cancel() {
     if(cancel) {
         window.location.href = "book_list.html"

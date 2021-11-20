@@ -5,8 +5,8 @@ const router = express.Router()
 const bookModel = require("../models/bookModel")
 const { validateBook } = require("../models/Validator");
 const changelogModel = require("../models/changeLogModel");
-// Define a /api/books endpoint that responds with an
-// array of all books.
+
+// Define a /api/books endpoint that responds with an array of all books.
 router.get("/allbookinfo", (req, res) => {
     bookModel.allbookinfo()
         .then((results) => {
@@ -16,6 +16,18 @@ router.get("/allbookinfo", (req, res) => {
             // Log any errors to the node console
             console.log(error)
             res.status(500).json("query error")
+        })
+})
+
+//Api endpoint that Gets the info of the user who edited the book
+router.get("/userinfo", (req, res) => {
+    bookModel.userinfo()
+        .then((results) => {
+            res.status(200).json(results)
+        })
+        .catch((error) => {
+            console.log(error)
+            res.status(500).json('query error')
         })
 })
 
@@ -95,7 +107,7 @@ router.get("/book/genre/:genre", (req, res) => {
             res.status(404).json("that genre doesnt exists dummy")
         })
 })
-
+// Select author by author namee
 router.get("/book/author/:author", (req, res) => {
     bookModel.getBookByAuthor(req.params.author)
         .then((results) => {
@@ -111,7 +123,7 @@ router.get("/book/author/:author", (req, res) => {
         })
 })
 
-// ADD BOOK //
+// Api endpoint that POSTS data to create a book
 router.post("/book/add", validateBook, (req, res) => {
 
     let book = req.body
@@ -140,7 +152,7 @@ router.post("/book/add", validateBook, (req, res) => {
         })
 })
 
-//Update a book
+//API endpoints that POSTS to update the book
 router.post("/books/update", validateBook, (req, res) => {
 
     let book = req.body
@@ -153,7 +165,8 @@ router.post("/books/update", validateBook, (req, res) => {
             book.genre,
             book.millionsSold,
             book.languageWritten,
-            book.coverImagePath
+            book.coverImagePath,
+            book.authorID
         )
         .then((result) => {
             if (result.affectedRows > 0) {
@@ -168,7 +181,7 @@ router.post("/books/update", validateBook, (req, res) => {
         })
 })
 
-//Delete book
+//API endpoint that Deletes a book based on the book id that is givne
 router.get("/book/delete", (req, res) => {
 
     let bookId = req.query.id
@@ -188,10 +201,6 @@ router.get("/book/delete", (req, res) => {
             res.status(500).json("failed to delete book")
         })
 })
-
- 
-  
-
 //This allows the server.js to import (require)
 // routes define in this file.
 module.exports = router

@@ -1,9 +1,10 @@
+// Fetches a list of all the authors
 fetch("/api/authors")
     .then(response => response.json())
     .then(authors => {
         console.log(authors)
         let author_list = document.getElementById("author-list")
-
+        //loops through all the authors and populates into a table
         for (let author of authors) {
             author_list.innerHTML += `
     <article class="author_table">

@@ -1,7 +1,7 @@
 let urlParamters = new URLSearchParams(window.location.search)
 
 let userId = urlParamters.get("id")
-
+//Populates the Delete user form  uses the fetch to grab all the data
 if (userId) {
     fetch(`/api/users/${userId}`)
         .then(res => res.json())
@@ -16,24 +16,8 @@ if (userId) {
             document.getElementById("accessRights").value = user.accessRights
         })
 }
-
-//Populate a field similar to the book list
-/* /if (userId) {
-    fetch(`/api/users/${userId}`)
-        .then(res => res.json())
-        .then(user => {
-            document.getElementById("delete-user").innerHTML += `
-        <article class="book" id="update-book">
-            <h1>${user.userId}</h1>
-            <h2>${user.firstName}</h2>
-            <h3>${user.lastName}</h3>
-            <h3>${user.email}</h3>
-            <input type="button" id="deleteUser" value="submit" onclick="deleteUser()">
-        </article>
-            `    
-        }) */
-
- function deleteUser() {
+// Function to deleteUser
+function deleteUser() {
     // Get access to the update user form 
     let deleteUserForm = document.getElementById("delete-user-form")
     // conver the form data into a json string
@@ -53,22 +37,3 @@ if (userId) {
         window.location.href = "list_users.html"
     })
 }
-
-
-/* function deleteUser() {
-    let deleteUser = document.getElementById("deleteUser")
-    if (deleteUser) {
-    fetch(`/api/users/delete?id=` + userId, {
-        method: "POST",
-        headers: {
-            'Content-type': "application/json"
-        },
-        
-    })
-    .then(res => res.json())
-    .then(response => {
-        alert(response)
-        //Redirect back to user list
-        window.location.href = "list_users.html"
-    })}
-} */

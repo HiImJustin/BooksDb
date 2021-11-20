@@ -1,8 +1,9 @@
+//request the api endpoint to fetch all of the users
 fetch("/api/users")
     .then(res => res.json())
     .then(users => {
         let userListSection = document.getElementById("user-list")
-
+        //loops through each user to create a table
         for (let user of users) {
             userListSection.innerHTML += `
             <article class="user">

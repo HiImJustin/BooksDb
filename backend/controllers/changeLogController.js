@@ -4,6 +4,7 @@ const router = express.Router()
 
 const changeLogModel = require("../models/changeLogModel")
 
+//Api endpoint for creating a new change log
 router.post("/changelog", (req, res) => {
     
     let book = req.body
@@ -22,6 +23,7 @@ router.post("/changelog", (req, res) => {
     })
 })
 
+//Api endpoint POSTS data to update the update log
 router.post("/updatelog", (req, res) => {
     
     let book = req.body
@@ -41,6 +43,7 @@ router.post("/updatelog", (req, res) => {
     })
 })
 
+//Api endpoint that GET's the info from the changelog
 router.get("/changeloginfo", (req, res) => {
     changeLogModel.booklog()
     .then((results) => {

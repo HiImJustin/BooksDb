@@ -5,9 +5,9 @@ const router = express.Router()
 //Access author model so we can return authors and thier
 // data in this file
 const authorModel = require("../models/authorModel")
-
+//validation 
 const {body, validationResult} = require('express-validator')
-
+//imports validator.js
 const {
     validateAuthor
 } = require('../models/Validator')
@@ -111,24 +111,10 @@ router.get("/author/birthYear/:mango", (req, res) => {
             res.status(500).json("failed to find that birthYear")
         })
 })
-router.get("/author/deathYear/:deathYear" , (req, res) => {
-    authorModel.getAuthorByDeathYear(req.params.deathYear)
-        .then((results) => {
-            if (results.length > 0) {
-                res.status(200).json(results[0])
-            } else {
-                res.status(400).json("failed to find that deathyear")
-            }
-        })
-        .catch((error) => {
-            console.log(error)
-            res.status(500).json("failed to query that deathyear")
-        })
-})
 // Get by functions complete
 
 // Start of add functions //
-
+//api Endpoint that Posts the data to create an author
 router.post("/create/author", validateAuthor, (req, res) => {
 
     let author = req.body
@@ -149,7 +135,7 @@ router.post("/create/author", validateAuthor, (req, res) => {
     })
 })
 
-
+// Delete author api endpoint
 router.post("/author/delete", (req, res) => {
 
     let authorId = req.query.id
@@ -169,7 +155,7 @@ router.post("/author/delete", (req, res) => {
             res.status(500).json("failed to delete Author")
         })
     })
-
+//update author api endpoint
 router.post("/author/update", validateAuthor, (req, res) => {
 
     let author = req.body
@@ -194,9 +180,6 @@ router.post("/author/update", validateAuthor, (req, res) => {
         res.status(500).json("failed to update author")
     })    
 })
-
-
-
 
 //This allows the server.js to import (require)
 // routes define in this file.

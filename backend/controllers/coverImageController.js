@@ -3,6 +3,8 @@ const express = require("express")
 const router = express.Router()
 const coverImageModel = require("../models/coverImageModel")
 
+
+//API endpoint that GETS a list of all avaliable images
 router.get("/coverimages", (req, res) => {
     coverImageModel.getAllCoverImages()
         .then((results) => {
@@ -13,14 +15,4 @@ router.get("/coverimages", (req, res) => {
             res.status(500).json("query error")
         })
 })
-
-
-
-
-
-
-
-
-
-
 module.exports = router

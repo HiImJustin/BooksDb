@@ -1,9 +1,9 @@
 const express = require("express")
-
+// allows us to use api from server
 const router = express.Router()
-
+// requires the userModel
 const userModel = require("../models/userModel")
-
+// npm install bcrypt
 const bcrypt = require("bcrypt")
 
 //npm install validator
@@ -104,7 +104,7 @@ router.get("/users/accessRights/:accessRights", (req, res) => {
         })
 })
 
-//Create new user
+//POSTS user data to the Api endpoint then to the database
 router.post("/users/create", validateUser, (req, res) => {
     //req.body represents the form field data (json in body of fetch)
     let user = req.body
@@ -139,7 +139,7 @@ router.post("/users/create", validateUser, (req, res) => {
 
 })
 
-//Updates a user
+//POSTS Update form data to update a user
 router.post("/users/update", validateUser, (req, res) => {
     // The req.body represents the posted json data from the form
     let user = req.body
@@ -171,7 +171,7 @@ router.post("/users/update", validateUser, (req, res) => {
         })
 })
 
-//delete
+//POST sends the delete request to the database
 router.post("/users/delete", (req, res) => {
     //Access the user id from the body of the request
     let userId = req.query.id
@@ -221,7 +221,7 @@ router.post("/users/delete", (req, res) => {
     }
 }) */
 
-//test if sessions is actually working
+//test if sessions is actually working, gets all the user info that is made in the login
 router.get('/secret',(req,res) => {
     if(req.session.user){
      result = req.session.user
@@ -231,7 +231,7 @@ router.get('/secret',(req,res) => {
     }  
 })
 
-// Api endpoint for logout
+// Api endpoint for logout, destroys the session
 router.get('/logout', (req, res) => {
     if (req.session) {
         req.session.destroy(error => {
@@ -278,6 +278,7 @@ router.post("/users/login" , (req, res) => {
         })
 })
 
+//Logs a user out, destroys the session
 router.post("/users/logout" , (req, res) => {
     // Destory the session
     req.session.destroy()

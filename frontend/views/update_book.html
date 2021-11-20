@@ -49,7 +49,7 @@
     
             <section>
                 <label for="genre">Genre</label>
-                <input type="text" name="genre" id="genre" required pattern="^[a-zA-Z ]{1,19}$" minlength="2"
+                <input type="text" name="genre" id="genre" required pattern="^[a-zA-Z /]{1,19}$" minlength="2"
                 maxlength="19" placeholder="Genre">
                 <div class="error-div">Must contain only normal characters and between 1 and 19 characters long</div>
             </section>
@@ -68,14 +68,13 @@
     
             <section>
                 <label for="coverImagePath">Cover Image</label>
-                <input type="text" name="coverImagePath" id="coverImagePath"
-                placeholder="Cover Image">
+                <select name="coverImagePath" id="coverimagepath">
+                </select>
             </section>
     
             <section>
                 <label for="author">Author:</label>
                 <select name="authorID" id="author" required>
-                    <option value="">Select....</option>
                 </select>
                 <div class="error-div">Please select the correct Author</div>
             </section>

@@ -18,7 +18,7 @@ if (authorId) {
             document.getElementById("deathYear").value = author.deathYear
         })
 }
-
+//Update user function
 function updateAuthor() {
     // Get access to the update user form 
     let updateUserForm = document.getElementById("update-author-form")
@@ -34,6 +34,7 @@ function updateAuthor() {
     })
     .then(res => res.json())
     .then(response => {
+        //handles the response from the server
         alert(response)
         //Redirect back to user list
         window.location.href = "author_list.html"

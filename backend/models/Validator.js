@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const {check, validationResult} = require('express-validator')
 
+//Validation for all author forms
 exports.validateAuthor = [
     check('name')
         .trim()
@@ -10,7 +11,7 @@ exports.validateAuthor = [
         .isEmpty()
         .withMessage("Author's name can not be empty!")
         .bail()
-        .matches('^[A-Z][a-zA-Z ,]{2,39}$')
+        .matches('^[A-Z][a-zA-Z ]{2,39}$')
         .isLength({min:2})
         .withMessage("Minimum 2 character required")
         .bail(),
@@ -21,7 +22,7 @@ exports.validateAuthor = [
         .isEmpty()
         .withMessage("Author's surname name can not be empty!")
         .bail()
-        .matches('^[A-Z][a-zA-Z ,]{2,39}$')
+        .matches('^[A-Z][a-zA-Z ]{2,39}$')
         .isLength({min:2})
         .withMessage("Minimum 2 character required")
         .bail(),
@@ -32,7 +33,7 @@ exports.validateAuthor = [
         .isEmpty()
         .withMessage("Nationality can not be empty!")
         .bail()
-        .matches('^[A-Z][a-zA-Z ]{2,19}$')
+        .matches('^[A-Z][a-zA-Z ]{2,29}$')
         .isLength({min:2})
         .withMessage("Minimum 2 character required")
         .bail(),
@@ -67,7 +68,7 @@ exports.validateAuthor = [
         next();
     } 
 ]
-
+// Validation for all book forms
 exports.validateBook = [
     check('bookTitle')
         .trim()
@@ -162,7 +163,7 @@ exports.validateBook = [
             next();
         } 
 ]
-
+// Validation for user forms
 exports.validateUser = [
     check('firstName')
         .trim()
@@ -203,7 +204,7 @@ exports.validateUser = [
         .bail(),
     check('password')
         .trim()
-        .escape()
+        /* .escape() */
         .not()
         .isEmpty()
         .withMessage("Password cannot be empty")

@@ -25,21 +25,21 @@
         <form id="createAuthor">
             <section>
                 <label for="name">Author Name</label>
-                <input type="name" name="name" id="name" required pattern="^[A-Z][a-zA-Z]{1,19}$" minlength="2"
+                <input type="name" name="name" id="name" required pattern="^[A-Z][a-zA-Z ]{2,39}$" minlength="2"
                     maxlength="19" placeholder="First Name">
                 <div class="error-div">Author's first name must start with a capital</div>
             </section>
 
             <section>
                 <label for="surname">Surname</label>
-                <input type="text" name="surname" id="surname" required pattern="^[A-Z][a-zA-Z]{1,19}$" minlength="2"
+                <input type="text" name="surname" id="surname" required pattern="^[A-Z][a-zA-Z ]{2,39}$" minlength="2"
                     maxlength="19" placeholder="Surname">
                 <div class="error-div">Surname must start with a capital</div>
             </section>
 
             <section>
                 <label for="nationality">Nationality</label>
-                <input type="text" name="nationality" id="nationality" required pattern="^[a-zA-Z]{1,19}$" minlength="2"
+                <input type="text" name="nationality" id="nationality" required pattern="^[A-Z][a-zA-Z ]{1,29}$" minlength="2"
                     maxlength="19" placeholder="Nationality">
                 <div class="error-div">Must contain only normal characters and between 1 and 19 characters long</div>
             </section>
